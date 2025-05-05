@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://bgaewhaushgdn"]
+[gd_scene load_steps=3 format=3 uid="uid://bgaewhaushgdn"]
+
+[ext_resource type="Texture2D" uid="uid://bkgpfl8s6ncst" path="res://Assets/Sprites/bg.png" id="1_mv0hc"]
+[ext_resource type="PackedScene" uid="uid://cnot467r4d732" path="res://Scenes/Ball/ball.tscn" id="2_qxfds"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(574, 323)
+scale = Vector2(0.601389, 0.601389)
+texture = ExtResource("1_mv0hc")
+
+[node name="Ball" parent="." instance=ExtResource("2_qxfds")]
+position = Vector2(571, 546)
