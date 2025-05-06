@@ -15,6 +15,11 @@ run/main_scene="uid://bgaewhaushgdn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ScoreManager="*res://Resources/Globals/ScoreManager.gd"
+SignalHandler="*res://Resources/Globals/SignalHandler.gd"
+
 [input]
 
 LEFT={
