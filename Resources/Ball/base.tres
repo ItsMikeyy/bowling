@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BallData" load_steps=2 format=3 uid="uid://bykepkl6eo3bp"]
+
+[ext_resource type="Script" uid="uid://ckcn1kh57ikue" path="res://Resources/Ball/BallData.gd" id="1_fddef"]
+
+[resource]
+script = ExtResource("1_fddef")
+name = "Ball"
+price = 0
+throw_speed = 400.0
+metadata/_custom_type_script = "uid://ckcn1kh57ikue"

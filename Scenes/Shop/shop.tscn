@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxf5uj0tqinh5"]
+[gd_scene load_steps=7 format=3 uid="uid://cxf5uj0tqinh5"]
 
 [ext_resource type="Script" uid="uid://ce2pmkwoqy4f2" path="res://Scenes/Shop/shop.gd" id="1_8dak6"]
 [ext_resource type="Texture2D" uid="uid://dxaggumc1dumd" path="res://Assets/Sprites/shopbg.png" id="1_78vcx"]
 [ext_resource type="Texture2D" uid="uid://dcsqllso6o5nk" path="res://Assets/Sprites/frame.png" id="2_dqdqq"]
 [ext_resource type="PackedScene" uid="uid://dajyxeduj5cr" path="res://Scenes/Frame/frame.tscn" id="3_w8bjl"]
+[ext_resource type="FontFile" uid="uid://b2be0dbmti4h8" path="res://Assets/Fonts/Pixeled.ttf" id="5_274ew"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dqdqq"]
+font = ExtResource("5_274ew")
 font_size = 48
 font_color = Color(0.82606, 0.82606, 0.82606, 1)
 
@@ -16,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(180, 698)
 script = ExtResource("1_8dak6")
 
 [node name="bg" type="TextureRect" parent="."]
@@ -134,10 +137,11 @@ anchor_right = 0.851563
 anchor_bottom = 0.822531
 offset_left = -20.0
 offset_top = -20.0
-offset_right = 20.0
+offset_right = 20.0001
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(-325.001, -343)
 theme_override_constants/separation = 50
 metadata/_edit_use_anchors_ = true
 
@@ -191,8 +195,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -20.0
-offset_top = -23.0
+offset_top = -67.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(-248, -576)
 label_settings = SubResource("LabelSettings_dqdqq")
