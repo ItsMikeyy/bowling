@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnot467r4d732"]
+[gd_scene load_steps=5 format=3 uid="uid://cnot467r4d732"]
 
 [ext_resource type="Script" uid="uid://chp7tne5d2btw" path="res://Scenes/Ball/ball.gd" id="1_1rrwo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dpq8s"]
+friction = 0.2
+bounce = 0.2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpq8s"]
 load_path = "res://.godot/imported/ball.png-f7daf3e9206963eab7c6cd6da748e585.ctex"
@@ -8,8 +12,13 @@ load_path = "res://.godot/imported/ball.png-f7daf3e9206963eab7c6cd6da748e585.cte
 [sub_resource type="CircleShape2D" id="CircleShape2D_1rrwo"]
 radius = 51.9711
 
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="RigidBody2D"]
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_dpq8s")
+gravity_scale = 0.0
+linear_damp = 0.4
 script = ExtResource("1_1rrwo")
+throw_speed = 100.0
 
 [node name="BallSprite" type="Sprite2D" parent="."]
 scale = Vector2(3, 3)

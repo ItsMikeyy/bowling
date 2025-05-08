@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Ball
 
 var arrow: Sprite2D 
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 func move_ball() -> void:
 	#Move ball side to side until SPACE is pressed
 	if Input.is_action_just_pressed("CONFIRM"):
-		velocity = Vector2.ZERO
+		linear_velocity = Vector2.ZERO
 		is_moving = false
 		is_aiming = true
 		animation_player.play("aim")
@@ -52,7 +52,7 @@ func aim_ball() -> void:
 
 
 func throw_ball(delta: float) -> void:
-	velocity += Vector2(throw_angle * 5,-throw_speed) * delta #Need to fix * 5 but it works for now
+	var direction := Vector2(0, -1).normalized()  # Isometric "down-right"
+	linear_velocity = direction * throw_speed
 	ball_sprite.scale -= Vector2(SHRINK_RATE, SHRINK_RATE) #For depth effect
-	move_and_slide()
 	

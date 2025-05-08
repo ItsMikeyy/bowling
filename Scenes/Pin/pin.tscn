@@ -1,17 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://da7jq5lvioyrn"]
+[gd_scene load_steps=4 format=3 uid="uid://da7jq5lvioyrn"]
 
+[ext_resource type="Script" uid="uid://t2e7a65u5tb8" path="res://Scenes/Pin/pin.gd" id="1_rejyg"]
 [ext_resource type="Texture2D" uid="uid://dbmi42suvfay0" path="res://Assets/Sprites/test_fall_left0000.png" id="1_y50u7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rejyg"]
-size = Vector2(29, 71)
+size = Vector2(25, 63)
 
-[node name="Pin" type="Area2D"]
+[node name="Pin" type="RigidBody2D"]
+collision_layer = 2
+mass = 0.2
+gravity_scale = 0.0
+sleeping = true
+max_contacts_reported = 2
+script = ExtResource("1_rejyg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(321.5, 162.5)
+position = Vector2(19.5, 0.5)
 shape = SubResource("RectangleShape2D_rejyg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(302, 162.5)
 scale = Vector2(2, 2)
 texture = ExtResource("1_y50u7")

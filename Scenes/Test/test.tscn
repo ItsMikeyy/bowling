@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://balyd0i7n42v1"]
+
+[ext_resource type="PackedScene" uid="uid://da7jq5lvioyrn" path="res://Scenes/Pin/pin.tscn" id="1_kr3tn"]
+[ext_resource type="PackedScene" uid="uid://cnot467r4d732" path="res://Scenes/Ball/ball.tscn" id="2_v7cj3"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Pin" parent="." instance=ExtResource("1_kr3tn")]
+position = Vector2(526, 213)
+
+[node name="Pin2" parent="." instance=ExtResource("1_kr3tn")]
+position = Vector2(568, 213)
+
+[node name="Pin3" parent="." instance=ExtResource("1_kr3tn")]
+position = Vector2(611, 213)
+
+[node name="Ball" parent="." instance=ExtResource("2_v7cj3")]
