@@ -1,19 +1,13 @@
-extends RigidBody2D
+extends RigidBody3D
 
-var is_knocked: bool = false
-var base_position: Vector2
-func _ready():
-	base_position = global_position
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-func _physics_process(delta):
-	if not is_knocked:
-		# Option 1: Check tilt
-		if abs(rotation_degrees) > 30:
-			is_knocked = true
-			print("Pin knocked (rotation)")
-
-		# Option 2: Check if moved far from base
-		elif (global_position - base_position).length() > 20:
-			is_knocked = true
-			print("Pin knocked (displaced)")
-			set_collision_mask_value(2, true)
+func _ready() -> void:
+	axis_lock_angular_x = true
+	axis_lock_angular_y = true
+	
+func _on_body_entered(body: Node) -> void:
+	if body is Ball:
+		print("BALL")
+		set_collision_mask_value(1, false)
+		animation_player.play("hit")

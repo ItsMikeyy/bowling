@@ -1,28 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnot467r4d732"]
 
-[ext_resource type="Script" uid="uid://chp7tne5d2btw" path="res://Scenes/Ball/ball.gd" id="1_1rrwo"]
+[ext_resource type="Script" uid="uid://dmkpcx14r2p7y" path="res://Scenes/Ball/Ball.gd" id="1_1rrwo"]
+[ext_resource type="Texture2D" uid="uid://ot6a4brfj1q5" path="res://Assets/Sprites/ball.png" id="1_dpq8s"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dpq8s"]
-friction = 0.2
-bounce = 0.2
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1rrwo"]
+friction = 0.5
+bounce = 0.1
+absorbent = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpq8s"]
-load_path = "res://.godot/imported/ball.png-f7daf3e9206963eab7c6cd6da748e585.ctex"
+[sub_resource type="SphereShape3D" id="SphereShape3D_1rrwo"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1rrwo"]
-radius = 51.9711
-
-[node name="Ball" type="RigidBody2D"]
-mass = 0.5
-physics_material_override = SubResource("PhysicsMaterial_dpq8s")
-gravity_scale = 0.0
-linear_damp = 0.4
+[node name="Ball" type="RigidBody3D"]
+collision_mask = 5
+mass = 7.0
+physics_material_override = SubResource("PhysicsMaterial_1rrwo")
+lock_rotation = true
+linear_damp = 0.2
+angular_damp = 0.2
 script = ExtResource("1_1rrwo")
-throw_speed = 100.0
 
-[node name="BallSprite" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
-texture = SubResource("CompressedTexture2D_dpq8s")
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_dpq8s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1rrwo")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_1rrwo")

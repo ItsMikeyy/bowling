@@ -1,23 +1,75 @@
-[gd_scene load_steps=4 format=3 uid="uid://da7jq5lvioyrn"]
+[gd_scene load_steps=8 format=3 uid="uid://da7jq5lvioyrn"]
 
-[ext_resource type="Script" uid="uid://t2e7a65u5tb8" path="res://Scenes/Pin/pin.gd" id="1_rejyg"]
+[ext_resource type="Script" uid="uid://do6ufvhdwugtv" path="res://Scenes/Pin/Pin.gd" id="1_rejyg"]
 [ext_resource type="Texture2D" uid="uid://dbmi42suvfay0" path="res://Assets/Sprites/test_fall_left0000.png" id="1_y50u7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rejyg"]
-size = Vector2(25, 63)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rejyg"]
+friction = 0.6
+rough = true
 
-[node name="Pin" type="RigidBody2D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y50u7"]
+height = 0.716614
+radius = 0.0913086
+
+[sub_resource type="Animation" id="Animation_rejyg"]
+resource_name = "hit"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 1.5708), Vector3(0.785398, 0, 1.5708), Vector3(1.5708, 0, 1.5708), Vector3(2.35619, 0, 1.5708), Vector3(3.14159, 0, 1.5708), Vector3(3.92699, 0, 1.5708), Vector3(4.71239, 0, 1.5708), Vector3(5.49779, 0, 1.5708), Vector3(6.28319, 0, 1.5708)]
+}
+
+[sub_resource type="Animation" id="Animation_3ixhn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v8obe"]
+_data = {
+&"RESET": SubResource("Animation_3ixhn"),
+&"hit": SubResource("Animation_rejyg")
+}
+
+[node name="Pin" type="RigidBody3D"]
 collision_layer = 2
+collision_mask = 7
 mass = 0.2
-gravity_scale = 0.0
-sleeping = true
-max_contacts_reported = 2
+physics_material_override = SubResource("PhysicsMaterial_rejyg")
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_rejyg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(19.5, 0.5)
-shape = SubResource("RectangleShape2D_rejyg")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+texture_filter = 0
 texture = ExtResource("1_y50u7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_y50u7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v8obe")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
