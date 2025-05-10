@@ -1,88 +1,59 @@
-[gd_scene load_steps=6 format=3 uid="uid://1as4erbwodgp"]
+[gd_scene load_steps=4 format=3 uid="uid://1as4erbwodgp"]
 
-[ext_resource type="Texture2D" uid="uid://bkgpfl8s6ncst" path="res://Assets/Sprites/bg.png" id="1_gwu2e"]
-[ext_resource type="PackedScene" uid="uid://cnot467r4d732" path="res://Scenes/Ball/ball.tscn" id="2_xbxml"]
-[ext_resource type="PackedScene" uid="uid://da7jq5lvioyrn" path="res://Scenes/Pin/pin.tscn" id="4_y3kpf"]
-
-[sub_resource type="GDScript" id="GDScript_xbxml"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gwu2e"]
-size = Vector3(11.8507, 1, 7.46362)
+[ext_resource type="Script" uid="uid://bihx4oes013g8" path="res://Scenes/Game/Game.gd" id="1_y3kpf"]
+[ext_resource type="PackedScene" uid="uid://dx0xpy3tv3eu2" path="res://Scenes/Ground/Ground.tscn" id="4_ln2h6"]
+[ext_resource type="PackedScene" uid="uid://cg7xrumumctl0" path="res://Scenes/KillZone/KillZone.tscn" id="4_y3kpf"]
 
 [node name="Game" type="Node3D"]
-script = SubResource("GDScript_xbxml")
+script = ExtResource("1_y3kpf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.902585, 0.430511, 0, -0.430511, 0.902585, 0, -8.5106, 6.4279)
+transform = Transform3D(1, 0, 0, 0, 0.96883, 0.247726, 0, -0.247726, 0.96883, 0, -7.90604, 7.2203)
 fov = 44.5
 
-[node name="Ball" parent="." instance=ExtResource("2_xbxml")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.355276, -10.1515, 3.76886)
+[node name="Ground" parent="." instance=ExtResource("4_ln2h6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.98, -10.133, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.7103, -2.74752)
-collision_layer = 4
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.575832, 0)
-shape = SubResource("BoxShape3D_gwu2e")
-debug_color = Color(0.870476, 0.0209448, 0.517831, 1)
+[node name="PinSpawns" type="Node" parent="."]
 
-[node name="Sprite3D3" type="Sprite3D" parent="StaticBody3D"]
-transform = Transform3D(0.834844, 0, 0, 0, -6.29141e-08, 0.853225, 0, -1.43931, -3.72957e-08, 0, 0, 0)
-visible = false
-texture = ExtResource("1_gwu2e")
+[node name="Pin0Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -10, -5.51393)
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -10.7103, -3.13699)
-visible = false
+[node name="Pin1Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -10, -5.71393)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.575832, 0)
-visible = false
-shape = SubResource("BoxShape3D_gwu2e")
-debug_color = Color(0.870476, 0.0209448, 0.517831, 1)
+[node name="Pin2Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -10, -5.71393)
 
-[node name="Sprite3D3" type="Sprite3D" parent="StaticBody3D2"]
-transform = Transform3D(0.834844, 0, 0, 0, -6.29141e-08, 0.853225, 0, -1.43931, -3.72957e-08, 0, 0, 0)
-visible = false
-texture = ExtResource("1_gwu2e")
+[node name="Pin3Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -10, -5.91393)
 
-[node name="Pin" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.4293, -2.47412)
+[node name="Pin4Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -10, -5.91393)
 
-[node name="Pin2" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.427084, -10.4293, -2.47412)
+[node name="Pin5Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -10, -5.91393)
 
-[node name="Pin3" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.857433, -10.4293, -2.47412)
+[node name="Pin6Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -6.11393)
 
-[node name="Pin5" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20937, -10.4293, -2.19401)
+[node name="Pin7Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -10, -6.11393)
 
-[node name="Pin6" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636454, -10.4293, -2.19401)
+[node name="Pin8Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -10, -6.11393)
 
-[node name="Pin7" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0668, -10.4293, -2.19401)
+[node name="Pin9Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -10, -6.11393)
 
-[node name="Pin8" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20937, -10.4293, -2.19401)
+[node name="KillZone" parent="." instance=ExtResource("4_y3kpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.42286)
 
-[node name="Pin9" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.636454, -10.4293, -2.19401)
+[node name="BallSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, -0.729342)
 
-[node name="Pin10" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0668, -10.4293, -2.19401)
-
-[node name="Pin11" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.427725, -10.4293, -1.91724)
-
-[node name="Pin12" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858075, -10.4293, -1.91724)
-
-[node name="Pin13" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.645044, -10.4293, -1.74702)
-
-[node name="Pin4" parent="." instance=ExtResource("4_y3kpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29503, -10.4293, -2.47412)
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

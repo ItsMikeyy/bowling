@@ -1,13 +1,12 @@
 extends RigidBody3D
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+class_name Pin
 
-func _ready() -> void:
-	axis_lock_angular_x = true
-	axis_lock_angular_y = true
-	
-func _on_body_entered(body: Node) -> void:
-	if body is Ball:
-		print("BALL")
-		set_collision_mask_value(1, false)
-		animation_player.play("hit")
+var fallen = false
+
+#Check if pin has fallen
+func _on_knock_detection_body_entered(body: Node3D) -> void:
+	if body.name == "Ground":
+		fallen = true
+		SignalHandler.pin_knock.emit(name)
+		

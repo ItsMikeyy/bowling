@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b74mol11mtp23" path="res://Scenes/KillZone/KillZone.gd" id="1_ixxpe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixxpe"]
-size = Vector2(1189, 20)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ixxpe"]
 
-[node name="KillZone" type="Area2D"]
+[node name="KillZone" type="Area3D"]
 script = ExtResource("1_ixxpe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(584.5, 0)
-shape = SubResource("RectangleShape2D_ixxpe")
+[node name="CollisionShape2D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_ixxpe")
+debug_color = Color(0.898039, 0, 0.772549, 1)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
