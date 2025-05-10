@@ -17,6 +17,9 @@ func _ready():
 		print("Scoreboard found. Filling frames 1–9.")
 		for i in range(1, 10):  # from 1 to 9
 			scoreboard.mark_frame_1(i, i)
+			scoreboard.mark_frame_total(i, i)
+		
+		scoreboard.mark_frame_total(10, 0)
 	else:
 		print("Scoreboard node not found!")
 
@@ -30,6 +33,7 @@ func _process(delta):
 			tester = 1
 			scoreboard.mark_frame_1(1, 10)
 			print("Frame 1 updated with a 0!")
+			scoreboard.mark_frame_total(10, 100000)
 	
 	elif Input.is_action_pressed("TEST") and tester == 1: 
 		var scoreboard = $FrameSheetRoot/Scoreboard
