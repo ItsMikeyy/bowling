@@ -5,6 +5,7 @@ var arrow: Sprite2D
 
 @onready var ball_sprite: Sprite2D = $BallSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedBall
 
 @export var throw_speed: float = 400.0
 @export var aim_speed: float = 0.05
@@ -49,10 +50,14 @@ func aim_ball() -> void:
 		is_aiming = false
 		is_throwing = true
 		
+		# Hide static sprite, show and animate the rolling sprite
+		ball_sprite.visible = false
+		animated_sprite.visible = true
+		animated_sprite.play("Roll")  
 
 
 func throw_ball(delta: float) -> void:
 	velocity += Vector2(throw_angle * 5,-throw_speed) * delta #Need to fix * 5 but it works for now
-	ball_sprite.scale -= Vector2(SHRINK_RATE, SHRINK_RATE) #For depth effect
+	animated_sprite.scale -= Vector2(SHRINK_RATE, SHRINK_RATE) #For depth effect
 	move_and_slide()
 	

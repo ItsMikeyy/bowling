@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://2t7kuvebemtb"]
+
+[ext_resource type="Script" uid="uid://d3u6i3tc2hpv4" path="res://Scenes/Esc/EscMenu.gd" id="1_ikty5"]
+[ext_resource type="Texture2D" uid="uid://b1ue0g77dyokw" path="res://Assets/Sprites/buttons/test_background.png" id="2_6elv5"]
+
+[node name="EscMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ikty5")
+
+[node name="MenuBox" type="NinePatchRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_6elv5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBox"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MainMenu" type="TextureButton" parent="MenuBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="Pins" type="TextureButton" parent="MenuBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="TextureButton" parent="MenuBox/VBoxContainer"]
+layout_mode = 2

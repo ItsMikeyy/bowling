@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4i8gaxg1h38n"]
+
+[ext_resource type="Texture2D" uid="uid://b713pbdbxa56j" path="res://Assets/Sprites/frame_sheet/Spare_box_frame_sheet_w_gaps.png" id="1_woc05"]
+
+[node name="SpareMark" type="Sprite2D"]
+texture = ExtResource("1_woc05")
