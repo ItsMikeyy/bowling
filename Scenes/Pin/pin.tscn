@@ -1,17 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://da7jq5lvioyrn"]
+[gd_scene load_steps=7 format=3 uid="uid://da7jq5lvioyrn"]
 
+[ext_resource type="Script" uid="uid://do6ufvhdwugtv" path="res://Scenes/Pin/Pin.gd" id="1_rejyg"]
 [ext_resource type="Texture2D" uid="uid://dbmi42suvfay0" path="res://Assets/Sprites/test_fall_left0000.png" id="1_y50u7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rejyg"]
-size = Vector2(29, 71)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rejyg"]
+friction = 0.4
+rough = true
 
-[node name="Pin" type="Area2D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y50u7"]
+height = 0.716614
+radius = 0.0913086
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(321.5, 162.5)
-shape = SubResource("RectangleShape2D_rejyg")
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rejyg"]
+height = 0.0397034
+radius = 0.0522461
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(302, 162.5)
-scale = Vector2(2, 2)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rejyg"]
+radius = 0.186523
+height = 0.50199
+
+[node name="Pin" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 7
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_rejyg")
+center_of_mass_mode = 1
+contact_monitor = true
+max_contacts_reported = 4
+linear_damp = 0.2
+angular_damp = 0.2
+script = ExtResource("1_rejyg")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+texture_filter = 0
 texture = ExtResource("1_y50u7")
+
+[node name="Body" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0775542, 0)
+shape = SubResource("CylinderShape3D_y50u7")
+
+[node name="Base" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.38, 0)
+shape = SubResource("CylinderShape3D_rejyg")
+
+[node name="KnockDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.318853, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KnockDetection"]
+shape = SubResource("CapsuleShape3D_rejyg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="KnockDetection" to="." method="_on_knock_detection_area_entered"]
+[connection signal="body_entered" from="KnockDetection" to="." method="_on_knock_detection_body_entered"]

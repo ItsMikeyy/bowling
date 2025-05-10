@@ -1,96 +1,29 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnot467r4d732"]
+[gd_scene load_steps=5 format=3 uid="uid://cnot467r4d732"]
 
-[ext_resource type="Script" uid="uid://chp7tne5d2btw" path="res://Scenes/Ball/ball.gd" id="1_1rrwo"]
-[ext_resource type="Texture2D" uid="uid://bb880h71arhn" path="res://Assets/Sprites/ball1/ball2.png" id="2_prv8g"]
-[ext_resource type="Texture2D" uid="uid://by722au1yya2u" path="res://Assets/Sprites/ball1/ball3.png" id="3_r4q1c"]
-[ext_resource type="Texture2D" uid="uid://bhn37lyp8vfxu" path="res://Assets/Sprites/ball1/ball4.png" id="4_vjok0"]
-[ext_resource type="Texture2D" uid="uid://cjjwj6nwm6jb8" path="res://Assets/Sprites/ball1/ball5.png" id="5_ycrk3"]
-[ext_resource type="Texture2D" uid="uid://bon8xs1rpf1r4" path="res://Assets/Sprites/ball1/ball6.png" id="6_hxwqy"]
-[ext_resource type="Texture2D" uid="uid://pfd22yi6log4" path="res://Assets/Sprites/ball1/ball7.png" id="7_vfnyp"]
-[ext_resource type="Texture2D" uid="uid://m2qigekvphtl" path="res://Assets/Sprites/ball1/ball8.png" id="8_n1k1l"]
-[ext_resource type="Texture2D" uid="uid://cqayn37c1j5u4" path="res://Assets/Sprites/ball1/ball9.png" id="9_sdw1u"]
-[ext_resource type="Texture2D" uid="uid://c4prs5sdp35il" path="res://Assets/Sprites/ball1/ball10.png" id="10_2vw5b"]
-[ext_resource type="Texture2D" uid="uid://jtrqvqvqv743" path="res://Assets/Sprites/ball1/ball11.png" id="11_r7cdi"]
-[ext_resource type="Texture2D" uid="uid://dob4knublxmxo" path="res://Assets/Sprites/ball1/ball12.png" id="12_cgele"]
-[ext_resource type="Texture2D" uid="uid://34d1umw7jcby" path="res://Assets/Sprites/ball1/ball13.png" id="13_pc7tk"]
-[ext_resource type="Texture2D" uid="uid://om66e7lxaol6" path="res://Assets/Sprites/ball1/ball.png" id="14_1di1k"]
+[ext_resource type="Script" uid="uid://dmkpcx14r2p7y" path="res://Scenes/Ball/Ball.gd" id="1_1rrwo"]
+[ext_resource type="Texture2D" uid="uid://ot6a4brfj1q5" path="res://Assets/Sprites/ball.png" id="1_dpq8s"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpq8s"]
-load_path = "res://.godot/imported/ball.png-f7daf3e9206963eab7c6cd6da748e585.ctex"
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1rrwo"]
+friction = 0.5
+bounce = 0.1
+absorbent = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1rrwo"]
-radius = 51.9711
+[sub_resource type="SphereShape3D" id="SphereShape3D_1rrwo"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lbwdc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_prv8g")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_r4q1c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_vjok0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_ycrk3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_hxwqy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_vfnyp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_n1k1l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_sdw1u")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_n1k1l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_sdw1u")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_n1k1l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_sdw1u")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_2vw5b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_r7cdi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_cgele")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_pc7tk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_1di1k")
-}],
-"loop": true,
-"name": &"Roll",
-"speed": 24.0
-}]
-
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="RigidBody3D"]
+collision_mask = 5
+mass = 7.0
+physics_material_override = SubResource("PhysicsMaterial_1rrwo")
+lock_rotation = true
+linear_damp = 0.2
+angular_damp = 0.2
 script = ExtResource("1_1rrwo")
 
-[node name="BallSprite" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
-texture = SubResource("CompressedTexture2D_dpq8s")
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("1_dpq8s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_1rrwo")
-
-[node name="AnimatedBall" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_lbwdc")
-animation = &"Roll"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_1rrwo")

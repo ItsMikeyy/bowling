@@ -1,101 +1,59 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgaewhaushgdn"]
+[gd_scene load_steps=4 format=3 uid="uid://1as4erbwodgp"]
 
-[ext_resource type="Texture2D" uid="uid://bkgpfl8s6ncst" path="res://Assets/Sprites/bg.png" id="1_mv0hc"]
-[ext_resource type="PackedScene" uid="uid://cnot467r4d732" path="res://Scenes/Ball/ball.tscn" id="2_qxfds"]
-[ext_resource type="Texture2D" uid="uid://ot6a4brfj1q5" path="res://Assets/Sprites/ball.png" id="3_i1e5p"]
-[ext_resource type="Texture2D" uid="uid://cwe8ah5pwjlhe" path="res://Assets/Sprites/arrow.png" id="3_qikps"]
-[ext_resource type="PackedScene" uid="uid://2t7kuvebemtb" path="res://Scenes/Esc/esc_menu.tscn" id="6_vifcx"]
+[ext_resource type="Script" uid="uid://bihx4oes013g8" path="res://Scenes/Game/Game.gd" id="1_y3kpf"]
+[ext_resource type="PackedScene" uid="uid://dx0xpy3tv3eu2" path="res://Scenes/Ground/Ground.tscn" id="4_ln2h6"]
+[ext_resource type="PackedScene" uid="uid://cg7xrumumctl0" path="res://Scenes/KillZone/KillZone.tscn" id="4_y3kpf"]
 
-[sub_resource type="Animation" id="Animation_qikps"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(369, 546)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Arrow:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
+[node name="Game" type="Node3D"]
+script = ExtResource("1_y3kpf")
 
-[sub_resource type="Animation" id="Animation_i1e5p"]
-resource_name = "aim"
-length = 0.7
-loop_mode = 2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Arrow:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-0.523599, 0.523599]
-}
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96883, 0.247726, 0, -0.247726, 0.96883, 0, -7.90604, 7.2203)
+fov = 44.5
 
-[sub_resource type="Animation" id="Animation_qxfds"]
-resource_name = "move"
-loop_mode = 2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(369, 546), Vector2(800, 546)]
-}
+[node name="Ground" parent="." instance=ExtResource("4_ln2h6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.98, -10.133, 0)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1e5p"]
-_data = {
-&"RESET": SubResource("Animation_qikps"),
-&"aim": SubResource("Animation_i1e5p"),
-&"move": SubResource("Animation_qxfds")
-}
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
-[node name="Game" type="Node2D"]
+[node name="PinSpawns" type="Node" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(574, 323)
-scale = Vector2(0.601389, 0.601389)
-texture = ExtResource("1_mv0hc")
+[node name="Pin0Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -10, -5.51393)
 
-[node name="Ball" parent="." instance=ExtResource("2_qxfds")]
-position = Vector2(369, 546)
-aim_speed = 0.1
-ball_texture = ExtResource("3_i1e5p")
+[node name="Pin1Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -10, -5.71393)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Ball"]
-libraries = {
-&"": SubResource("AnimationLibrary_i1e5p")
-}
+[node name="Pin2Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -10, -5.71393)
 
-[node name="Arrow" type="Sprite2D" parent="Ball"]
-position = Vector2(1, -36)
-scale = Vector2(2, 3)
-texture = ExtResource("3_qikps")
-offset = Vector2(-0.5, -15.3333)
+[node name="Pin3Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -10, -5.91393)
 
-[node name="EscMenu" parent="." instance=ExtResource("6_vifcx")]
+[node name="Pin4Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -10, -5.91393)
+
+[node name="Pin5Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, -10, -5.91393)
+
+[node name="Pin6Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -6.11393)
+
+[node name="Pin7Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -10, -6.11393)
+
+[node name="Pin8Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -10, -6.11393)
+
+[node name="Pin9Spawn" type="Marker3D" parent="PinSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -10, -6.11393)
+
+[node name="KillZone" parent="." instance=ExtResource("4_y3kpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.42286)
+
+[node name="BallSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, -0.729342)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
