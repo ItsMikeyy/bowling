@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmir1tdbvtdjw"]
+[gd_scene load_steps=5 format=3 uid="uid://cmir1tdbvtdjw"]
 
 [ext_resource type="Script" uid="uid://bihx4oes013g8" path="res://Scenes/Game/Game.gd" id="1_y3kpf"]
+[ext_resource type="PackedScene" uid="uid://2t7kuvebemtb" path="res://Scenes/Esc/esc_menu.tscn" id="4_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://dx0xpy3tv3eu2" path="res://Scenes/Ground/Ground.tscn" id="4_ln2h6"]
 [ext_resource type="PackedScene" uid="uid://cg7xrumumctl0" path="res://Scenes/KillZone/KillZone.tscn" id="4_y3kpf"]
 
@@ -55,5 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.42286)
 
 [node name="BallSpawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, -0.729342)
+
+[node name="EscMenu" parent="." instance=ExtResource("4_i1e5p")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
