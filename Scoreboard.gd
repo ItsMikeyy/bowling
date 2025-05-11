@@ -45,43 +45,83 @@ func mark_frame(frame_index: int, is_strike: bool, is_spare: bool, is_blank: boo
 	$MarkContainer.add_child(mark_instance)
 	marks.append(mark_instance)
 
-func mark_frame_1(frame_index: int, frame_score: int) -> void:
-	if frame_index < 1 or frame_index > 10:
-		push_warning("Invalid frame index: %d" % frame_index)
+func mark_frame_1(frame_index_1: int, frame_index_2: int, frame_score: int) -> void:
+	print(">> mark_frame_1 CALLED:", frame_index_1, frame_index_2, frame_score)
+	
+	if frame_index_1 < 1 or frame_index_1 > 13:
+		push_warning("Invalid frame index: %d" % frame_index_1)
+		return
+	if frame_index_2 < 1 or frame_index_2 > 3:
+		push_warning("Invalid frame index: %d" % frame_index_2)
 		return
 	
-	var marker_name = "f%d_1" % frame_index
-	var marker = $MarkContainer1.get_node_or_null(marker_name)
+	if frame_index_2 == 1:
+		var marker_name = "f%d_1" % frame_index_1
+		var instance_name = "f%d_1_instance_1" % frame_index_1
+		var marker = $MarkContainer1.get_node_or_null(marker_name)
 	
-	if marker == null:
-		push_warning("No marker found for %s" % marker_name)
-		return
+		if marker == null:
+			push_warning("No marker found for %s" % marker_name)
+			return
 
-	var existing_label: Label = null
+		var existing_label: Label = null
 
-	for child in $MarkContainer1.get_children():
-		if child.position == marker.position:
-			var label_node = child.get_node_or_null("Label")
+		var existing_instance = $MarkContainer1.get_node_or_null(instance_name)
+		if existing_instance:
+			var label_node = existing_instance.get_node_or_null("Label")
 			if label_node and label_node is Label:
-				existing_label = label_node
-				break
-
-	if existing_label:
-		existing_label.text = str(frame_score)
-		existing_label.visible = true
-	else:
-		var mark_instance = text_scene.instantiate()
-		mark_instance.position = marker.position
-
-		var label_node = mark_instance.get_node_or_null("Label")
-		if label_node and label_node is Label:
-			label_node.text = str(frame_score)
-			label_node.visible = true
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found in existing instance: %s" % instance_name)
 		else:
-			push_warning("Label node not found or invalid in text_scene")
+			var mark_instance = text_scene.instantiate()
+			mark_instance.name = instance_name  # ✅ Assign unique name
+			mark_instance.position = marker.position
 
-		$MarkContainer1.add_child(mark_instance)
-		marks.append(mark_instance)
+			var label_node = mark_instance.get_node_or_null("Label")
+			
+			if label_node and label_node is Label:
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found or invalid in new instance")
+
+			$MarkContainer1.add_child(mark_instance)
+			marks.append(mark_instance)
+		
+	elif frame_index_2 >= 2:
+		var marker_name = "f%d" % frame_index_1
+		var instance_name = "f%d_1_instance_2" % frame_index_1
+		
+		var marker = $MarkContainerBox.get_node_or_null(marker_name)
+	
+		if marker == null:
+			push_warning("No marker found for %s" % marker_name)
+			return
+
+		var existing_label: Label = null
+
+		var existing_instance = $MarkContainerBox.get_node_or_null(instance_name)
+		if existing_instance:
+			var label_node = existing_instance.get_node_or_null("Label")
+			if label_node and label_node is Label:
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found in existing instance: %s" % instance_name)
+		else:
+			var mark_instance = text_scene.instantiate()
+			mark_instance.name = instance_name  # ✅ Assign unique name
+			mark_instance.position = marker.position
+
+			var label_node = mark_instance.get_node_or_null("Label")
+			
+			if label_node and label_node is Label:
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found or invalid in new instance")
+
+			$MarkContainerBox.add_child(mark_instance)
+			marks.append(mark_instance)
+	
 		
 func mark_frame_total(frame_index: int, frame_score: int) -> void:
 	current_total += frame_score
@@ -103,7 +143,7 @@ func mark_frame_total(frame_index: int, frame_score: int) -> void:
 	if existing_instance:
 		var label_node = existing_instance.get_node_or_null("Label")
 		if label_node and label_node is Label:
-			configure_label(label_node, str(current_total), frame_index == 10, marker.position)
+			configure_label(label_node, str(current_total), frame_index == 10, marker.position, true)
 		else:
 			push_warning("Label node not found in existing instance: %s" % instance_name)
 	else:
@@ -113,7 +153,7 @@ func mark_frame_total(frame_index: int, frame_score: int) -> void:
 
 		var label_node = mark_instance.get_node_or_null("Label")
 		if label_node and label_node is Label:
-			configure_label(label_node, str(current_total), frame_index == 10, marker.position)
+			configure_label(label_node, str(current_total), frame_index == 10, marker.position, true)
 		else:
 			push_warning("Label node not found or invalid in new instance")
 
@@ -121,9 +161,11 @@ func mark_frame_total(frame_index: int, frame_score: int) -> void:
 		marks.append(mark_instance)
 	
 	
-func configure_label(label: Label, text: String, is_frame_ten: bool, marker_position: Vector2) -> void:
+func configure_label(label: Label, text: String, is_frame_ten: bool, marker_position: Vector2, is_total: bool) -> void:
 	# Update scale of text to ensure it fits in scoreboard nicely
-	scale_label_by_score_length(label, is_frame_ten)
+	
+	scale_label_by_score_length(label, is_frame_ten, text, is_total)
+	
 	
 	# Set label properties
 	label.text = text
@@ -149,31 +191,36 @@ func configure_label(label: Label, text: String, is_frame_ten: bool, marker_posi
 
 
 
-func scale_label_by_score_length(label: Label, is_frame_10: bool) -> void:
-	var digit_count := str(current_total).length()
+func scale_label_by_score_length(label: Label, is_frame_10: bool, score: String, is_total: bool) -> void:
+	var digit_count := str(score).length()
 	var base_scale := 1.0
 	
 	# Adjust scaling based on number of digits
-	if is_frame_10:
-		if digit_count >= 6:
-				base_scale = 0.75
-				if digit_count >= 8:
-					base_scale = 0.66
-				
-	else: 
-		match digit_count:
-			1:
-				base_scale = 1.0
-			2:
-				base_scale = 1.0
-			3:
-				base_scale = 1.0
-			4:
-				base_scale = 0.75 
-			5: 
-				base_scale = 0.66 
-			6:
-				base_scale = 0.50
+	if is_total:
+		if is_frame_10:
+			if digit_count >= 6:
+					base_scale = 0.75
+					if digit_count >= 8:
+						base_scale = 0.66
+					
+		else: 
+			match digit_count:
+				1:
+					base_scale = 1.0
+				2:
+					base_scale = 1.0
+				3:
+					base_scale = 1.0
+				4:
+					base_scale = 0.75 
+				5: 
+					base_scale = 0.66 
+				6:
+					base_scale = 0.50
+	
+	else:
+		if digit_count == 2:
+			base_scale = 0.75
 
 	# Apply to the label's parent (Node2D), assuming it's the direct container
 	var parent_node = label.get_parent()

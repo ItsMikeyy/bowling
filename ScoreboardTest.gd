@@ -13,10 +13,11 @@ func _ready():
 		# Test spare in frame 2
 		scoreboard.mark_frame(2, false, true, false)
 		# Test score in frame 9
-		
+		scoreboard.mark_frame_1(1, 1, 2)
 		print("Scoreboard found. Filling frames 1–9.")
 		for i in range(1, 10):  # from 1 to 9
-			scoreboard.mark_frame_1(i, i)
+			scoreboard.mark_frame_1(i, 1, i)
+			scoreboard.mark_frame_1(i, 2, i)
 			scoreboard.mark_frame_total(i, i)
 		
 		scoreboard.mark_frame_total(10, 0)
@@ -31,7 +32,7 @@ func _process(delta):
 			scoreboard.mark_frame(4, true, false, false)  # Mark a strike for frame 4
 			print("Frame 4 updated with a strike!")
 			tester = 1
-			scoreboard.mark_frame_1(1, 10)
+			scoreboard.mark_frame_1(1, 1, 10)
 			print("Frame 1 updated with a 0!")
 			scoreboard.mark_frame_total(10, 1111)
 	
