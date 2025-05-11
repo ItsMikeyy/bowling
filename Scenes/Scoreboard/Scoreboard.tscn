@@ -93,31 +93,31 @@ position = Vector2(538, 43.5)
 [node name="TotalContainer" type="Node2D" parent="Scoreboard"]
 
 [node name="t1" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(212.5, 64.5)
+position = Vector2(232.5, 64.5)
 
 [node name="t2" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(254.5, 64.5)
+position = Vector2(274.5, 64.5)
 
 [node name="t3" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(296.5, 64.5)
+position = Vector2(316.5, 64.5)
 
 [node name="t4" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(338.5, 64.5)
+position = Vector2(358.5, 64.5)
 
 [node name="t5" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(380.5, 64.5)
+position = Vector2(400.5, 64.5)
 
 [node name="t6" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(422.5, 64.5)
+position = Vector2(442.5, 64.5)
 
 [node name="t7" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(464.5, 64.5)
+position = Vector2(484.5, 64.5)
 
 [node name="t8" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(506.5, 64.5)
+position = Vector2(526.5, 64.5)
 
 [node name="t9" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(548.5, 64.5)
+position = Vector2(568.5, 64.5)
 
 [node name="t10" type="Marker2D" parent="Scoreboard/TotalContainer"]
-position = Vector2(601, 64.5)
+position = Vector2(631.5, 65)

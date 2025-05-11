@@ -33,7 +33,7 @@ func _process(delta):
 			tester = 1
 			scoreboard.mark_frame_1(1, 10)
 			print("Frame 1 updated with a 0!")
-			scoreboard.mark_frame_total(10, 100000)
+			scoreboard.mark_frame_total(10, 1111)
 	
 	elif Input.is_action_pressed("TEST") and tester == 1: 
 		var scoreboard = $FrameSheetRoot/Scoreboard
@@ -47,3 +47,18 @@ func _process(delta):
 			scoreboard.mark_frame(7, false, false, true)  # Mark a blank for frame 7
 			print("Frame 7 updated with a blank!")
 			tester = 0
+
+
+# Testing funciton used to find widest number in font for smoother updating
+func find_widest_digit(font: Font) -> void:
+	var widest_char = ""
+	var max_width = 0
+	var array = ['00', '44', '99']
+	for digit in array:
+		var width = font.get_string_size(digit).x
+		print("Digit: ", digit, " Width: ", width)
+		if width > max_width:
+			max_width = width
+			widest_char = digit
+
+	print("Widest digit is: ", widest_char, " with width: ", max_width)
