@@ -4,6 +4,7 @@ extends Node2D
 @export var spare_scene: PackedScene
 @export var blank_scene: PackedScene
 @export var text_scene: PackedScene
+@export var name_scene: PackedScene
 
 var marks: Array[Node2D] = []
 var current_total: int
@@ -15,112 +16,166 @@ NEED TO UPDATE LOGIC FOR FRAME 10
 '''
 Handles Strikes/Spares plus 2nd shot blanks
 '''
-func mark_frame(frame_index: int, is_strike: bool, is_spare: bool, is_blank: bool) -> void:
-	if frame_index < 1 or frame_index > 12:
-		push_warning("Invalid frame index: %d" % frame_index)
+
+func set_player_name(name: String, player_num: int): # Needs to be updated for multiple players when scoreboard is expanded.
+	var marker = get_node_or_null("Name")
+	if marker == null:
+		push_warning("Name marker not found")
 		return
 
-	if !is_strike and !is_spare and !is_blank:
-		return  # Nothing to mark
+	# Clear any existing instance first (optional)
+	var existing = get_node_or_null("player_name_instance")
+	if existing:
+		existing.queue_free()
 
-	var marker_name = "f%d" % frame_index
-	var marker = $MarkContainer.get_node_or_null(marker_name)
+	var name_instance = text_scene.instantiate()
+	name_instance.name = "player_name_instance"
+	add_child(name_instance)  # Add first to ensure size is calculated
 
+	# Set the scale before alignment
+	var scale_factor = 2.25
+	name_instance.scale = Vector2(scale_factor, scale_factor)  # Increase size by 50%
+
+	var label_node = name_instance.get_node_or_null("Label")
+	if label_node and label_node is Label:
+		label_node.text = name
+		label_node.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT  # Align left
+		label_node.autowrap_mode = TextServer.AUTOWRAP_OFF
+
+		# Ensure label has updated its size before positioning
+		await get_tree().process_frame
+
+		var label_size = label_node.get_minimum_size()
+
+		# Position the bottom-left corner of the label at the marker position
+		name_instance.position = Vector2(marker.position.x, marker.position.y - label_size.y/2 * scale_factor)
+		
+		name_instance.position.x += 10 * scale_factor
+		name_instance.position.y -= 6
+	else:
+		push_warning("Label node not found or invalid in player name instance")
+	
+
+func mark_frame(frame_index: int, shot_num: int, frame_score: int, is_strike: bool, is_spare: bool) -> void:
+	#print(">> mark_frame CALLED:", frame_index, shot_num, frame_score)
+	
+	var marker_name = null
+	var instance_name = null
+	var container = null
+	
+	if frame_index < 1 or frame_index > 13:
+		push_warning("Invalid frame index: %d" % frame_index)
+		return
+	if shot_num < 1 or shot_num > 3:
+		push_warning("Invalid frame index: %d" % shot_num)
+		return
+	
+	if is_strike or is_spare:
+		marker_name = "f%d" % frame_index
+		container = $SymbolContainer
+		instance_name = "f%d_instance_sym" % frame_index
+
+	else:
+		if shot_num == 1:
+			marker_name = "f%d_1" % frame_index
+			instance_name = "f%d_instance_1" % frame_index
+			container = $MarkContainer1
+		
+		elif shot_num == 2:
+			marker_name = "f%d" % frame_index
+			instance_name = "f%d_instance_2" % frame_index
+			container = $MarkContainerBox
+		
+		elif shot_num == 3:
+			marker_name = "f%d" % frame_index
+			instance_name = "f%d_instance_3" % frame_index
+			container = $MarkContainerBox
+	
+	var marker = container.get_node_or_null(marker_name)
+	
 	if marker == null:
 		push_warning("No marker found for %s" % marker_name)
 		return
+	
+	if !is_strike and !is_spare:
+		var existing_instance = container.get_node_or_null(instance_name)
+		if existing_instance:
+			var label_node = existing_instance.get_node_or_null("Label")
+			if label_node and label_node is Label:
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found in existing instance: %s" % instance_name)
+		else:
+			var sym_name = "f%d_instance_sym" % frame_index
+			var existing_sym = $SymbolContainer.get_node_or_null(sym_name)
+			if existing_sym:
+				existing_sym.visible = false
+				if existing_sym in marks:
+					marks.erase(existing_sym)
+				$SymbolContainer.remove_child(existing_sym)
+				#existing_sym.queue_free()
+				
+			var mark_instance = text_scene.instantiate()
+			mark_instance.name = instance_name  
+			mark_instance.position = marker.position
 
-	var mark_instance: Node2D
+			var label_node = mark_instance.get_node_or_null("Label")
+			
+			if label_node and label_node is Label:
+				configure_label(label_node, str(frame_score), false, marker.position, false)
+			else:
+				push_warning("Label node not found or invalid in new instance")
 
-	if is_strike:
-		mark_instance = strike_scene.instantiate()
-	elif is_spare:
-		mark_instance = spare_scene.instantiate()
-	elif is_blank:
-		mark_instance = blank_scene.instantiate()
+			container.add_child(mark_instance)
+			marks.append(mark_instance)
+	
 	else:
-		return
+		# Determine the correct label container and name based on shot_num
+		var label_container: Node
+		var label_instance_name: String
 
-	mark_instance.position = marker.position
-	$MarkContainer.add_child(mark_instance)
-	marks.append(mark_instance)
-
-func mark_frame_1(frame_index_1: int, frame_index_2: int, frame_score: int) -> void:
-	print(">> mark_frame_1 CALLED:", frame_index_1, frame_index_2, frame_score)
-	
-	if frame_index_1 < 1 or frame_index_1 > 13:
-		push_warning("Invalid frame index: %d" % frame_index_1)
-		return
-	if frame_index_2 < 1 or frame_index_2 > 3:
-		push_warning("Invalid frame index: %d" % frame_index_2)
-		return
-	
-	if frame_index_2 == 1:
-		var marker_name = "f%d_1" % frame_index_1
-		var instance_name = "f%d_1_instance_1" % frame_index_1
-		var marker = $MarkContainer1.get_node_or_null(marker_name)
-	
-		if marker == null:
-			push_warning("No marker found for %s" % marker_name)
+		if shot_num == 1:
+			label_container = $MarkContainer1
+			label_instance_name = "f%d_instance_1" % frame_index
+		elif shot_num == 2:
+			label_container = $MarkContainerBox
+			label_instance_name = "f%d_instance_2" % frame_index
+		elif shot_num == 3:
+			label_container = $MarkContainerBox
+			label_instance_name = "f%d_instance_3" % frame_index
+		else:
+			push_warning("Invalid shot_num for label removal")
 			return
 
-		var existing_label: Label = null
+		var existing_label_instance = label_container.get_node_or_null(label_instance_name)
+		if existing_label_instance:
+			existing_label_instance.visible = false
+			if existing_label_instance in marks:
+				marks.erase(existing_label_instance)
+			#existing_label_instance.queue_free()
+			label_container.remove_child(existing_label_instance)
+		
+		var sym_name = "f%d_instance_sym" % frame_index
+		var existing_sym = $SymbolContainer.get_node_or_null(sym_name)
+		if existing_sym:
+			existing_sym.visible = false
+			if existing_sym in marks:
+				marks.erase(existing_sym)
+			$SymbolContainer.remove_child(existing_sym)
 
-		var existing_instance = $MarkContainer1.get_node_or_null(instance_name)
-		if existing_instance:
-			var label_node = existing_instance.get_node_or_null("Label")
-			if label_node and label_node is Label:
-				configure_label(label_node, str(frame_score), false, marker.position, false)
-			else:
-				push_warning("Label node not found in existing instance: %s" % instance_name)
+		# Now mark the symbol (strike/spare)
+		var mark_instance = null
+		if is_strike:
+			mark_instance = strike_scene.instantiate()
+		elif is_spare:
+			mark_instance = spare_scene.instantiate()
 		else:
-			var mark_instance = text_scene.instantiate()
-			mark_instance.name = instance_name  # ✅ Assign unique name
-			mark_instance.position = marker.position
-
-			var label_node = mark_instance.get_node_or_null("Label")
-			
-			if label_node and label_node is Label:
-				configure_label(label_node, str(frame_score), false, marker.position, false)
-			else:
-				push_warning("Label node not found or invalid in new instance")
-
-			$MarkContainer1.add_child(mark_instance)
-			marks.append(mark_instance)
-		
-	elif frame_index_2 >= 2:
-		var marker_name = "f%d" % frame_index_1
-		var instance_name = "f%d_1_instance_2" % frame_index_1
-		
-		var marker = $MarkContainerBox.get_node_or_null(marker_name)
-	
-		if marker == null:
-			push_warning("No marker found for %s" % marker_name)
 			return
 
-		var existing_label: Label = null
-
-		var existing_instance = $MarkContainerBox.get_node_or_null(instance_name)
-		if existing_instance:
-			var label_node = existing_instance.get_node_or_null("Label")
-			if label_node and label_node is Label:
-				configure_label(label_node, str(frame_score), false, marker.position, false)
-			else:
-				push_warning("Label node not found in existing instance: %s" % instance_name)
-		else:
-			var mark_instance = text_scene.instantiate()
-			mark_instance.name = instance_name  # ✅ Assign unique name
-			mark_instance.position = marker.position
-
-			var label_node = mark_instance.get_node_or_null("Label")
-			
-			if label_node and label_node is Label:
-				configure_label(label_node, str(frame_score), false, marker.position, false)
-			else:
-				push_warning("Label node not found or invalid in new instance")
-
-			$MarkContainerBox.add_child(mark_instance)
-			marks.append(mark_instance)
+		mark_instance.name = "f%d_instance_sym" % frame_index
+		mark_instance.position = marker.position
+		$SymbolContainer.add_child(mark_instance)
+		marks.append(mark_instance)
 	
 		
 func mark_frame_total(frame_index: int, frame_score: int) -> void:
