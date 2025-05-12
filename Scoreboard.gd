@@ -15,6 +15,10 @@ NEED TO UPDATE LOGIC FOR FRAME 10
 '''
 Handles Strikes/Spares plus 2nd shot blanks
 '''
+
+func _enter_tree() -> void:
+	SignalHandler.set_score.connect(mark_frame_1)
+
 func mark_frame(frame_index: int, is_strike: bool, is_spare: bool, is_blank: bool) -> void:
 	if frame_index < 1 or frame_index > 12:
 		push_warning("Invalid frame index: %d" % frame_index)
