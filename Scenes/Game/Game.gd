@@ -102,15 +102,7 @@ func _on_start_reset_timer():
 
 func _on_timer_timeout() -> void:
 	shot_count += 1
-	if shot_count < max_shots:
+	if shot_count == 1:
 		if score >= 10:
-			print("STRIKE")
-			return
-		else:
-			remove_and_reset_pins()
-			spawn_ball()
-	elif score >= 10:
-		print("SPARE")
-	else:
-		print(score)
+			SignalHandler.set_score()
 	

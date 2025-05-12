@@ -8,6 +8,7 @@
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_y3kpf")
+max_shots = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.96883, 0.247726, 0, -0.247726, 0.96883, 0, -7.90604, 7.2203)
