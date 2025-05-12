@@ -1,6 +1,5 @@
 extends RigidBody3D
 
-class_name Pin
 
 var fallen = false
 
