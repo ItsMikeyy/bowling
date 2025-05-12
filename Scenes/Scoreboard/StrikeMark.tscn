@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://can51l2c22wew"]
+
+[ext_resource type="Texture2D" uid="uid://bq870tqtj8cgu" path="res://Assets/Sprites/frame_sheet/Strike_box_frame_sheet_w_gaps.png" id="1_py5hi"]
+
+[node name="StrikeMark" type="Sprite2D"]
+texture = ExtResource("1_py5hi")

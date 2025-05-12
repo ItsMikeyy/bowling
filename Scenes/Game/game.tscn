@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://1as4erbwodgp"]
+[gd_scene load_steps=6 format=3 uid="uid://cmir1tdbvtdjw"]
 
 [ext_resource type="Script" uid="uid://bihx4oes013g8" path="res://Scenes/Game/Game.gd" id="1_y3kpf"]
-[ext_resource type="Texture2D" uid="uid://0pteg7t1hsu0" path="res://Assets/Sprites/floor.png" id="4_3k6gv"]
+[ext_resource type="PackedScene" uid="uid://2t7kuvebemtb" path="res://Scenes/Esc/esc_menu.tscn" id="4_i1e5p"]
 [ext_resource type="PackedScene" uid="uid://dx0xpy3tv3eu2" path="res://Scenes/Ground/Ground.tscn" id="4_ln2h6"]
 [ext_resource type="PackedScene" uid="uid://cg7xrumumctl0" path="res://Scenes/KillZone/KillZone.tscn" id="4_y3kpf"]
+[ext_resource type="PackedScene" uid="uid://cshj5gmxqriom" path="res://Scenes/MainGameUI/MainGameUI.tscn" id="5_ciybh"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_y3kpf")
@@ -55,10 +56,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, -10, -6.11393)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.42286)
 
 [node name="BallSpawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, -0.729342)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, 0.884594)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(4.83573, 0, 0, 0, -5.95011e-07, -1, 0, 13.6123, -4.37114e-08, 0, -11.1338, -2.31322)
-texture = ExtResource("4_3k6gv")
+[node name="EscMenu" parent="." instance=ExtResource("4_i1e5p")]
+
+[node name="MainGameUI" parent="." instance=ExtResource("5_ciybh")]
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

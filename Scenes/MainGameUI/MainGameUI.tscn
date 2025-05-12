@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cshj5gmxqriom"]
+
+[ext_resource type="PackedScene" uid="uid://5545syjdlw30" path="res://Scenes/Scoreboard/Scoreboard.tscn" id="1_yw72j"]
+
+[node name="MainGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FrameSheetRoot" parent="MarginContainer" instance=ExtResource("1_yw72j")]

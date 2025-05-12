@@ -15,6 +15,8 @@ var score: int = 0
 var timer_start: bool = false
 var shot_count = 0
 
+
+
 func _enter_tree() -> void:
 	#Setup Signals
 	SignalHandler.pin_knock.connect(_on_pin_knocked)
@@ -22,6 +24,7 @@ func _enter_tree() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	setup_pin_spawns()
 	spawn_pins()
 	spawn_ball()
@@ -110,5 +113,4 @@ func _on_timer_timeout() -> void:
 		print("SPARE")
 	else:
 		print(score)
-	
 	

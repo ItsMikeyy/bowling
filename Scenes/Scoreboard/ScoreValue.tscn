@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7mxipdt7a0ew"]
+
+[ext_resource type="FontFile" uid="uid://c73q45rgolx8x" path="res://Assets/Fonts/PixelNums-Regular.ttf" id="1_aipqh"]
+
+[node name="ScoreValue" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -5.0
+offset_top = -7.0
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0.796078, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_fonts/font = ExtResource("1_aipqh")
+metadata/_edit_use_anchors_ = true

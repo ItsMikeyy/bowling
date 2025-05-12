@@ -1,0 +1,91 @@
+[gd_scene load_steps=16 format=3 uid="uid://c7jpyre8cid7k"]
+
+[ext_resource type="Script" uid="uid://clkq4ls0bis05" path="res://BallItem.gd" id="1_4n4l5"]
+[ext_resource type="Texture2D" uid="uid://ot6a4brfj1q5" path="res://Assets/Sprites/ball.png" id="2_hf1yl"]
+[ext_resource type="Texture2D" uid="uid://bb880h71arhn" path="res://Assets/Sprites/ball1/ball2.png" id="3_we3k2"]
+[ext_resource type="Texture2D" uid="uid://by722au1yya2u" path="res://Assets/Sprites/ball1/ball3.png" id="4_lww2k"]
+[ext_resource type="Texture2D" uid="uid://bhn37lyp8vfxu" path="res://Assets/Sprites/ball1/ball4.png" id="5_1sf0t"]
+[ext_resource type="Texture2D" uid="uid://cjjwj6nwm6jb8" path="res://Assets/Sprites/ball1/ball5.png" id="6_5vslp"]
+[ext_resource type="Texture2D" uid="uid://bon8xs1rpf1r4" path="res://Assets/Sprites/ball1/ball6.png" id="7_0mlk8"]
+[ext_resource type="Texture2D" uid="uid://pfd22yi6log4" path="res://Assets/Sprites/ball1/ball7.png" id="8_brp8q"]
+[ext_resource type="Texture2D" uid="uid://m2qigekvphtl" path="res://Assets/Sprites/ball1/ball8.png" id="9_j1w5v"]
+[ext_resource type="Texture2D" uid="uid://cqayn37c1j5u4" path="res://Assets/Sprites/ball1/ball9.png" id="10_8c6ln"]
+[ext_resource type="Texture2D" uid="uid://c4prs5sdp35il" path="res://Assets/Sprites/ball1/ball10.png" id="11_ip7yr"]
+[ext_resource type="Texture2D" uid="uid://jtrqvqvqv743" path="res://Assets/Sprites/ball1/ball11.png" id="12_tfqe1"]
+[ext_resource type="Texture2D" uid="uid://dob4knublxmxo" path="res://Assets/Sprites/ball1/ball12.png" id="13_5utbn"]
+[ext_resource type="Texture2D" uid="uid://34d1umw7jcby" path="res://Assets/Sprites/ball1/ball13.png" id="14_dm6gc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f26us"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hf1yl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_we3k2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lww2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1sf0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5vslp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0mlk8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_brp8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j1w5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8c6ln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j1w5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8c6ln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ip7yr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tfqe1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5utbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_dm6gc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hf1yl")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hf1yl")
+}],
+"loop": true,
+"name": &"still",
+"speed": 0.0
+}]
+
+[node name="BallItem" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4n4l5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_f26us")
+animation = &"still"

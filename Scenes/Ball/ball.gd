@@ -2,7 +2,7 @@ extends RigidBody3D
 
 class_name Ball
 
-@export var power: Vector3 = Vector3(0.0, 0.0,-500)
+@export var power: Vector3 = Vector3(0.0, 0.0,-700)
 const MOVE_SPEED: float =  300
 var is_moving: bool = true
 var has_thrown: bool = false

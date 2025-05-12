@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://hbqxsg4w4g6o"]
+
+[ext_resource type="Texture2D" uid="uid://1dw448f4m04u" path="res://Assets/Sprites/frame_sheet/blank_mark_larger.png" id="1_vd7y3"]
+
+[node name="BlankMark" type="Sprite2D"]
+texture = ExtResource("1_vd7y3")
