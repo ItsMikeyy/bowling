@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq3s3k7430rxj"]
 
-[ext_resource type="Script" uid="uid://d4jh6sw6le4f" path="res://ScoreboardTest.gd" id="1_xwbdr"]
+[ext_resource type="Script" path="res://ScoreboardTest.gd" id="1_xwbdr"]
 [ext_resource type="PackedScene" uid="uid://5545syjdlw30" path="res://Scenes/Scoreboard/Scoreboard.tscn" id="2_xwbdr"]
 
 [node name="ScoreboardTest" type="Node2D"]

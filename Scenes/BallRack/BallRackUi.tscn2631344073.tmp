@@ -74,6 +74,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_x7vfl")
+roll_in_duration = null
 shelf_item_scene = ExtResource("2_n81so")
 
 [node name="BallRackPNG" type="TextureRect" parent="."]

@@ -1,7 +1,7 @@
 extends Control
 
 #@onready var item_container: HBoxContainer = $ItemContainer
-@onready var tooltip_label: Label = $Hint
+@onready var tooltip: Control = $Tooltip
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -13,7 +13,7 @@ extends Control
 
 
 func _ready():
-	tooltip_label.visible = false
+	tooltip.hide_tooltip()
 	
 	var shelf_items = [
 	{
@@ -27,14 +27,17 @@ func _input(event):
 	if event.is_action_pressed("TEST"): 
 		animation_player.play("test")
 
-func show_tooltip(text: String, position: Vector2) -> void:
-	tooltip_label.text = text
-	tooltip_label.global_position = position + Vector2(12, 12)  # Slight offset from cursor
-	tooltip_label.visible = true
+func show_tooltip(text: String, position: Vector2, data: Variant = null) -> void:
+	# Get the global position and size of the item (this can be passed as `position` and `data`)
+	var item_global_position = position
+	#print(item_global_position)
+	var item_size = self.size
+	print(item_size)
+	tooltip.show_tooltip(text, item_global_position, item_size, data)
 
 
 func hide_tooltip() -> void:
-	tooltip_label.visible = false
+	tooltip.hide_tooltip()
 
 
 
@@ -58,7 +61,20 @@ func update_shelf(items: Array) -> void:
 
 
 func _on_mouse_entered():
-	get_parent().get_parent().show_tooltip("My Tooltip", get_global_mouse_position())
+	# Assuming "self" is the BallItem (Button) being hovered over
+	var item_data = self  # 'self' is the BallItem Button, which contains the AnimatedSprite2D
+
+	# Get the data we need: hint (description) and animation info from AnimatedSprite2D
+	var hint = item_data.hint
+	var animation_name = item_data.animated_sprite.animation  # This is the current animation name
+
+	# Get the position and size of the button (BallItem) for the tooltip positioning
+	var button_global_position = self.get_global_position()
+	var button_size = self.size  # Get the size of the button
+
+	# Now pass the data to show_tooltip()
+	get_parent().get_parent().show_tooltip(hint, button_global_position, button_size, self)
+
 
 func _on_mouse_exited():
 	get_parent().get_parent().hide_tooltip()

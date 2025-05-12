@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbpa8ombgbdf4"]
+
+[ext_resource type="Script" uid="uid://cuilx876yhuj2" path="res://Scenes/BallRack/Tooltip.gd" id="1_ilgdw"]
+[ext_resource type="Texture2D" uid="uid://pwey0ime7sbw" path="res://Assets/Sprites/tooltip.png" id="2_0rrjk"]
+[ext_resource type="Texture2D" uid="uid://xbaukskk2h8s" path="res://Assets/Sprites/buttons/mainmenu_60x18.png" id="2_026ni"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_026ni"]
+
+[node name="Tooltip" type="Panel"]
+z_index = -2
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_026ni")
+script = ExtResource("1_ilgdw")
+
+[node name="TooltipLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 122.0
+offset_bottom = 93.0
+autowrap_mode = 2
+
+[node name="SelectButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_left = 35.0
+offset_top = 96.0
+offset_right = 95.0
+offset_bottom = 114.0
+texture_normal = ExtResource("2_026ni")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_0rrjk")
+
+[connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]
