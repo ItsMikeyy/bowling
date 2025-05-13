@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mug3jic8fb7e"
-path="res://.godot/imported/powerbar18.png-70f44007373c0e706a44378d27b84ba7.ctex"
+uid="uid://ccti6oe2xhx7q"
+path="res://.godot/imported/PowerBar18.png-352d30189c442ea0e356ac94c035de2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/powerbar/powerbar18.png"
-dest_files=["res://.godot/imported/powerbar18.png-70f44007373c0e706a44378d27b84ba7.ctex"]
+source_file="res://Assets/Sprites/PowerBar/PowerBar18.png"
+dest_files=["res://.godot/imported/PowerBar18.png-352d30189c442ea0e356ac94c035de2d.ctex"]
 
 [params]
 

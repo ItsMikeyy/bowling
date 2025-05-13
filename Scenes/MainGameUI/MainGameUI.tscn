@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cshj5gmxqriom"]
+[gd_scene load_steps=4 format=3 uid="uid://cshj5gmxqriom"]
 
 [ext_resource type="PackedScene" uid="uid://5545syjdlw30" path="res://Scenes/Scoreboard/Scoreboard.tscn" id="1_yw72j"]
+[ext_resource type="PackedScene" uid="uid://b2are1aulhbhq" path="res://Scenes/ControlBar/ControlBar.tscn" id="2_edcg5"]
+[ext_resource type="PackedScene" uid="uid://cy7vdh303y5ei" path="res://Scenes/PowerBar/PowerBar.tscn" id="3_s37k2"]
 
 [node name="MainGameUI" type="Control"]
 layout_mode = 3
@@ -17,5 +19,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_bottom = 20
 
 [node name="FrameSheetRoot" parent="MarginContainer" instance=ExtResource("1_yw72j")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 22
+
+[node name="ControlBar" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_edcg5")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PowerBar" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_s37k2")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[editable path="MarginContainer/FrameSheetRoot"]

@@ -8,7 +8,6 @@
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_y3kpf")
-max_shots = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.96883, 0.247726, 0, -0.247726, 0.96883, 0, -7.90604, 7.2203)
@@ -61,8 +60,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475727, -10, 0.884594)
 
 [node name="EscMenu" parent="." instance=ExtResource("4_i1e5p")]
 
-[node name="MainGameUI" parent="." instance=ExtResource("5_ciybh")]
+[node name="UI" type="Node" parent="."]
+
+[node name="MainGameUI" parent="UI" instance=ExtResource("5_ciybh")]
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="UI/MainGameUI"]
+[editable path="UI/MainGameUI/MarginContainer/FrameSheetRoot"]

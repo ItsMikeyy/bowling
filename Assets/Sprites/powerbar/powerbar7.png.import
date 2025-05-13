@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5lin76cyk465"
-path="res://.godot/imported/powerbar7.png-c8b49e6e2e3d0d0987053e540e8b51b7.ctex"
+uid="uid://dtobhowx57r56"
+path="res://.godot/imported/PowerBar7.png-c9b3f4f488acc3aa2ff010cb6d5d8d60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/powerbar/powerbar7.png"
-dest_files=["res://.godot/imported/powerbar7.png-c8b49e6e2e3d0d0987053e540e8b51b7.ctex"]
+source_file="res://Assets/Sprites/PowerBar/PowerBar7.png"
+dest_files=["res://.godot/imported/PowerBar7.png-c9b3f4f488acc3aa2ff010cb6d5d8d60.ctex"]
 
 [params]
 

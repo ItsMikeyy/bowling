@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlvuikpser32y"
-path="res://.godot/imported/powerbar25.png-f088848e345c2081a8948ab7c6d3f210.ctex"
+uid="uid://disfv3ps2uver"
+path="res://.godot/imported/ControlBar19.png-6a54559bd3164b43b3422cc4124f55eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/powerbar/powerbar25.png"
-dest_files=["res://.godot/imported/powerbar25.png-f088848e345c2081a8948ab7c6d3f210.ctex"]
+source_file="res://Assets/Sprites/ControlBar/ControlBar19.png"
+dest_files=["res://.godot/imported/ControlBar19.png-6a54559bd3164b43b3422cc4124f55eb.ctex"]
 
 [params]
 

@@ -3,6 +3,9 @@ extends Node3D
 const PIN = preload("res://Scenes/Pin/pin.tscn")
 const BALL = preload("res://Scenes/Ball/ball.tscn")
 
+@onready var frame_sheet_root: Node2D = $UI/MainGameUI/MarginContainer/FrameSheetRoot/Scoreboard
+
+
 @onready var timer: Timer = $Timer
 @onready var pin_spawns: Node = $PinSpawns
 @onready var ball_spawn: Marker3D = $BallSpawn
@@ -15,7 +18,7 @@ var score: int = 0
 var timer_start: bool = false
 var shot_count = 0
 
-
+var frame_num: int = 1
 
 func _enter_tree() -> void:
 	#Setup Signals
@@ -104,5 +107,20 @@ func _on_timer_timeout() -> void:
 	shot_count += 1
 	if shot_count == 1:
 		if score >= 10:
-			SignalHandler.set_score()
-	
+			if frame_num != 10:
+				frame_sheet_root.mark_frame(frame_num, 2, score, true, false)
+			else:
+				frame_sheet_root.mark_frame(frame_num, shot_count, score, true, false)
+		else:
+			frame_sheet_root.mark_frame(frame_num, shot_count, score, false, false)
+	elif shot_count >= 2:
+		if score >= 10:
+			frame_sheet_root.mark_frame(frame_num, shot_count, score, false, true)
+		else:
+			frame_sheet_root.mark_frame(frame_num, shot_count, score, false, false)
+	frame_sheet_root.mark_frame_total(frame_num, score)	
+	remove_and_reset_pins()
+	score = 0
+	spawn_ball()
+			
+			

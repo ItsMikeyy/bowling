@@ -6,3 +6,10 @@ signal pin_knock
 signal start_reset_timer
 
 signal set_score
+
+signal set_control_rest_animation
+signal set_control_active_animation
+signal pause_control_active_animation
+signal set_power_rest_animation
+signal set_power_active_animation
+signal pause_power_active_animation
