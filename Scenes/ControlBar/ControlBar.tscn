@@ -89,7 +89,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"active",
-"speed": 30.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -116,9 +116,10 @@ script = ExtResource("1_cagp3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ylilk")
 animation = &"active"
-frame_progress = 0.267276
+frame_progress = 0.955289
 
 [node name="ControlLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = -145.0
 offset_top = -16.0
 offset_right = -49.0
