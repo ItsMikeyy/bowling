@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://yon4pv4l64ga"]
+
+[node name="PinSpawns" type="Node"]
+
+[node name="Pin0Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.724192, -10.0004, -5.83388)
+
+[node name="Pin1Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.473898, -10.0003, -6.33374)
+
+[node name="Pin2Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.973898, -10.0001, -6.33403)
+
+[node name="Pin3Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.223604, -10.0002, -6.83359)
+
+[node name="Pin4Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.723604, -10, -6.83388)
+
+[node name="Pin5Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 1.2236, -9.99977, -6.83418)
+
+[node name="Pin6Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, -0.0266901, -10.0001, -7.33344)
+
+[node name="Pin7Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.47331, -9.9999, -7.33374)
+
+[node name="Pin8Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 0.97331, -9.99967, -7.33403)
+
+[node name="Pin9Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, -0.000451968, 0.000588084, 0.000452213, 1, -0.000425627, -0.000587895, 0.000425887, 1, 1.47331, -9.99945, -7.33432)

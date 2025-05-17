@@ -34,9 +34,11 @@ func _ready() -> void:
 
 func spawn_ball() -> void:
 	#Create ball node and assign its position to BallSpawn 
-	var ball := BALL.instantiate()
+	var ball :Ball = BALL.instantiate()
 	ball.position = ball_spawn.position
 	ball_spawn.add_child(ball)
+	ball.ball_sprite.scale = Vector3(2,2,2)
+
 	
 
 func setup_pin_spawns() -> void:

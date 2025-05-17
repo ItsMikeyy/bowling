@@ -19,9 +19,8 @@ func _ready() -> void:
 	ball_sprite.animation = "rest"
 	control_bar = get_node("../../UI/MainGameUI/MarginContainer/VBoxContainer/ControlBar")
 	power_bar = get_node("../../UI/MainGameUI/MarginContainer/VBoxContainer/PowerBar")
-	print(control_bar)
+
 func _physics_process(delta: float) -> void:
-	
 	if is_moving:
 		move_ball(delta)
 	elif is_aiming:
@@ -34,6 +33,7 @@ func _physics_process(delta: float) -> void:
 
 
 func move_ball(delta: float) -> void:
+	#Moving ball left/right with A/D or LEFT/RIGHT
 	var direction: float = Input.get_axis("LEFT", "RIGHT")
 	linear_velocity = Vector3(direction * MOVE_SPEED, 0.0, 0.0) * delta
 	if Input.is_action_just_pressed("CONFIRM"):
@@ -42,6 +42,7 @@ func move_ball(delta: float) -> void:
 		control_bar.set_active_animation()
 		
 func aim_ball() -> void:
+	#Aim ball with with control bar
 	if Input.is_action_just_pressed("CONFIRM"):
 		is_aiming = false
 		is_charging = true
@@ -50,6 +51,7 @@ func aim_ball() -> void:
 		power_bar.set_active_animation()
 
 func charge_ball() -> void:
+	#charge shot with power bar
 	if Input.is_action_just_pressed("CONFIRM"):
 		is_charging = false
 		has_thrown = true
@@ -58,6 +60,8 @@ func charge_ball() -> void:
 		control_bar.set_rest_animation()
 		
 func throw_ball(delta: float) -> void:
+	#launch ball 
 	linear_velocity = Vector3(horizontal_power,0,power) * delta
+	#ball_sprite.sprite_frames.set_animation_speed("throw-", )
 	ball_sprite.animation = "throw"
 	ball_sprite.play()

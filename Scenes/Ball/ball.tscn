@@ -17,8 +17,6 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1rrwo"]
 friction = 0.5
-bounce = 0.1
-absorbent = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lbwdc"]
 animations = [{
